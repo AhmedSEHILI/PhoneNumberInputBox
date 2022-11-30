@@ -1,0 +1,293 @@
+<!DOCTYPE HTML />
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <style type="text/css">
+.select_outermost_unfocus
+{
+    /* background-color:red;
+    border: 5px solid red; */
+    overflow: hidden;
+    display: none;/*initial value - will be changed with js*/
+
+    /*prevent highlighting*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.select_outermost_unfocus:hover
+{
+    cursor: pointer;
+}
+.select_outermost_focus:hover
+{
+    cursor: pointer;
+}
+.select_outermost_focus
+{
+    overflow-y: scroll;
+    overflow: -moz-scrollbars-vertical;
+    height: 100px;
+     background-image:
+    linear-gradient(45deg, white 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, white 50%),
+    linear-gradient(to right, gray, gray);
+  background-position:
+    calc(100% - 15px) 1em,
+    calc(100% - 20px) 1em,
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+  border-color: grey;
+  outline: 0;
+}
+.select_outermost_focus:focus .unchosen_element/*when the select area is clicked then show all options*/
+{
+    display: inline-block;
+    
+}
+.chosen_element
+{
+    float: left;
+    background-color: #f4ebeb;
+    white-space: nowrap;/*keep text on one line*/
+    clear: both;
+    width: 40px;
+    height: 28px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    padding-right: 4px; 
+
+}
+.unchosen_element
+{
+    background-color:#f4ebeb;
+    display: none;
+    float: left;
+    white-space: nowrap;/*keep text on one line*/
+    clear:both;
+    width: 40px;
+    height: 28px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+
+
+}
+#invisible_screen
+{
+    background-color:green;
+    position: relative;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+}
+
+.form-text{
+	position:relative;
+}
+input{
+	padding:5px 5px 5px;
+    padding-left: 45px;
+}
+.static-value{
+	position:absolute;
+	left:10px;
+	font-weight:bold;
+	font-size:0.8em;
+	color:#444;
+	top:7px;
+}
+
+.big {
+    display: flex;
+    flex-direction: row;
+    margin-top: 60px;
+    margin-left: 10px;
+    /* left: 50%; 
+    transform: translate(-50%, -50%);   */
+
+    
+}
+
+.contain {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+
+}
+
+.det {
+    position: relative;
+    height: 300px;
+    width: 300px;
+    border-style: solid;
+    border-radius: 30px;
+}
+
+.txt {
+    margin-top: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.divbutt {
+    display: flex;
+    position: absolute;
+    flex-direction: row-reverse;
+    justify-items: end;
+    width: 300px;
+    /* margin-top: 60px;
+    margin-right: 60px; */
+    bottom: 60px;
+    right: 30px;
+}
+
+.butt {
+    background-color: #0099ff;
+    color : white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor : pointer;
+}
+
+.butt:hover {
+    background-color: #6abbf1;
+
+}
+
+.msg {
+    position: absolute;
+    bottom : 10px;
+    font-weight: bold;
+    width: 300px;
+    text-align: center;
+ 
+}
+
+.made {
+    position: absolute;
+    text-align: center;
+    text-align: justify;
+    width: 99vw;
+    bottom: 20;
+    text-align: center;
+}
+
+
+
+        </style>
+
+    </head>
+    <body>
+        <div class="contain">
+            <div class="det">
+                <div class="txt">Enter you phone number</div>
+                <div class="big">
+                    <div id='no_tabindex'></div>
+                    <div id='fallback_select'>
+                        <select >
+                            <option>Algeria</option>
+                            <option>germany</option>
+                            <option>uruguay</option>
+                            <option>USA</option>
+                            <option>France</option>
+                        </select>
+                    </div>
+                    <a class='select_outermost_unfocus' id='select_pretty' tabindex=0>
+                        <div class='chosen_element' id='option1'><img src='./algeria.svg'></div>
+                        <div class='unchosen_element' id='option2'><img src='./germany.svg'></div>
+                        <div class='unchosen_element' id='option3'><img src='./uruguay.svg'></div>
+                        <div class='unchosen_element' id='option4'><img src='./unitedStates.svg'></div>
+                        <div class='unchosen_element' id='option5'><img src='./france.svg'></div>
+                    </a>
+                    <div class="form-text">
+                        <input type="text" id="phone" onkeypress="return onlyNumberKey(event) "/>
+                        <label id = "lab" for="youridhere" class="static-value">+213 0</label>
+                    </div> 
+                </div>
+                <div class="divbutt"><button onclick="func" id = "b1" class="butt">Submit</button></div>
+                <div class="msg" id = "err"></div>
+            </div>
+            
+      </div>
+      <div class="made">Made with 💗 by ANDROMEDA && z3r0_day</div>
+       
+
+
+
+
+    <script src ="det.js"></script>
+    <script type='text/javascript'>
+
+        selected_element_id = 'option1';
+        showing_options = false;
+        mousedown = false;
+        window.onload = function() {
+            if(document.getElementById('select_pretty').getAttribute('tabIndex') !== null) {
+                document.getElementById('fallback_select').style.display = 'none';
+                document.getElementById('select_pretty').style.display = 'inline-block';
+                instate_select_box();
+                hide_options();
+            }
+            else {
+                alert('tabindex not supported - could be safari');
+            };
+        };
+
+        function option_clicked(option_id) {
+            if (mousedown)
+                return;
+        
+            document.getElementById(selected_element_id).className = 'unchosen_element';
+            selected_element_id = option_id;//save globally
+            document.getElementById(selected_element_id).className = 'chosen_element';
+            hide_options();
+            instate_select_box();
+        };
+        function select_pretty_mousedown(e)
+        {
+            mousedown = true;
+            show_options();
+        };
+        function select_pretty_mouseup(e)
+        {
+            mousedown = false;
+        };
+        function instate_select_box(e) {
+        //alert('mouseout');
+            document.getElementById('select_pretty').onmousedown = select_pretty_mousedown;
+            document.getElementById('select_pretty').onmouseup = select_pretty_mouseup;
+            document.getElementById('select_pretty').onmouseout = null;
+        };
+        function hide_options() {
+            if(!showing_options) {return;};
+            document.getElementById('option1').onmouseup = null;
+            document.getElementById('option2').onmouseup = null;
+            document.getElementById('option3').onmouseup = null;
+            document.getElementById('option4').onmouseup = null;
+            document.getElementById('option5').onmouseup = null;
+
+            document.getElementById('select_pretty').className = 'select_outermost_unfocus';
+            showing_options = false;
+        };
+                </script>
+    </body>
+
+    
+
+    <!-- onkeypress="return onlyNumberKey(event) -->
+</html>
